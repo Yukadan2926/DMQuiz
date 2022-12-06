@@ -1,5 +1,4 @@
 import java.awt.BorderLayout;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -8,23 +7,39 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class TitlePanel extends JPanel {
-	public TitlePanel(Quiz mf) {
-		Quiz mainframe = mf;
-		JLabel titleLabel = new JLabel("デュエマ用語クイズ");
-		JButton startButton = new JButton("Start");
-		JPanel btnPanel = new JPanel();
+	JLabel titleLabel = new JLabel();
+	JButton startButton = new JButton();
+	JButton termButton = new JButton();
+	JPanel btnPanel = new JPanel();
 
-		titleLabel.setFont(new Font("HGP創英角ﾎﾟｯﾌﾟ体", Font.PLAIN, 60));
+	public TitlePanel(QuizFrame qf) {
+		TermFrame termFrame = new TermFrame(qf);
+
+		titleLabel.setText("デュエマ用語クイズ");
+		titleLabel.setFont(qf.font(60));
 		titleLabel.setHorizontalAlignment(JLabel.CENTER);
 
-		startButton.setFont(new Font("HGP創英角ﾎﾟｯﾌﾟ体", Font.PLAIN, 20));
+		startButton.setText("Start");
+		startButton.setFont(qf.font(20));
 		startButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				mainframe.nextQuiz();
+				termFrame.setVisible(false);
+				qf.nextQuiz();
 			}
 		});
+
+		termButton.setText("Term");
+		termButton.setFont(qf.font(20));
+		termButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				termFrame.setVisible(true);
+			}
+		});
+
 		btnPanel.add(startButton);
+		btnPanel.add(termButton);
 
 		this.setLayout(new BorderLayout());
 		this.add(titleLabel, BorderLayout.CENTER);
