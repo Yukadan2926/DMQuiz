@@ -20,19 +20,29 @@ public class QuizFrame extends JFrame {
 			"ラッカ",
 			"リース"
 	};
+	int[] score = new int[10];
 	Container container = this.getContentPane();
-	TitlePanel titlePanel = new TitlePanel(this);
-	ScorePanel scorePanel = new ScorePanel(this);
 	CardLayout layout = new CardLayout();
 
 	public QuizFrame() {
 		this.setTitle("DMQuiz");
 		this.setSize(600, 400);
+		this.setIconImage(new ImageIcon("image/dm.png").getImage());
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setIconImage(new ImageIcon("image/dm.png").getImage());
 
 		container.setLayout(layout);
+		this.reset();
+	}
+
+	public static void main(String[] args) {
+		QuizFrame quizFrame = new QuizFrame();
+		quizFrame.setVisible(true);
+	}
+
+	public void reset() {
+		container.removeAll();
+		TitlePanel titlePanel = new TitlePanel(this);
 		container.add(titlePanel);
 		int[] nums = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 		int cnt = 0, r;
@@ -44,24 +54,6 @@ public class QuizFrame extends JFrame {
 				cnt++;
 			}
 		}
-		container.add(scorePanel);
-	}
-
-	public static void main(String[] args) {
-		QuizFrame quizFrame = new QuizFrame();
-		quizFrame.setVisible(true);
-	}
-
-	public void nextQuiz() {
-		layout.next(container);
-	}
-
-	public void correct() {
-		scorePanel.increment();
-	}
-
-	public Font font(int size) {
-		return new Font("HGP創英角ﾎﾟｯﾌﾟ体", Font.PLAIN, size);
 	}
 
 	public JLabel toLabel(String string, double size) {
@@ -73,7 +65,16 @@ public class QuizFrame extends JFrame {
 		return new JLabel(smallIcon);
 	}
 
-	public String term(int num) {
-		return terms[num];
+	public void scoreDisplay() {
+		ScorePanel scorePanel = new ScorePanel(this);
+		container.add(scorePanel);
+	}
+
+	public void nextPage() {
+		layout.next(container);
+	}
+
+	public Font font(int size) {
+		return new Font("HGP創英角ﾎﾟｯﾌﾟ体", Font.PLAIN, size);
 	}
 }

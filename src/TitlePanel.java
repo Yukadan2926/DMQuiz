@@ -10,6 +10,7 @@ public class TitlePanel extends JPanel {
 	JLabel titleLabel = new JLabel();
 	JButton startButton = new JButton();
 	JButton termButton = new JButton();
+	QuitButton quitButton = new QuitButton();
 	JPanel btnPanel = new JPanel();
 
 	public TitlePanel(QuizFrame qf) {
@@ -25,7 +26,7 @@ public class TitlePanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				termFrame.setVisible(false);
-				qf.nextQuiz();
+				qf.nextPage();
 			}
 		});
 
@@ -40,6 +41,7 @@ public class TitlePanel extends JPanel {
 
 		btnPanel.add(startButton);
 		btnPanel.add(termButton);
+		btnPanel.add(quitButton);
 
 		this.setLayout(new BorderLayout());
 		this.add(titleLabel, BorderLayout.CENTER);

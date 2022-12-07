@@ -21,7 +21,10 @@ public class AnswerPanel extends JPanel {
 		Timer sec = new Timer(1000, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				qf.nextQuiz();
+				if (num == 10) {
+					qf.scoreDisplay();
+				}
+				qf.nextPage();
 			}
 		});
 		sec.setRepeats(false);
@@ -41,9 +44,10 @@ public class AnswerPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if (katakana(textField.getText()).equals(qf.terms[color])) {
 					imageLabel.setText("正 解");
-					qf.correct();
+					qf.score[num - 1] = 1;
 				} else {
 					imageLabel.setText("不正解");
+					qf.score[num - 1] = 0;
 				}
 				textField.setEnabled(false);
 				sec.start();
